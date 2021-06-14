@@ -35,7 +35,8 @@ class Web_scrapper:
                 
             except Exception as e:
                 print(e)
-        return newarr
+        ret_arr = {'data':newarr,'name':'ebay'}
+        return ret_arr
 
     def amazon(self,name):
         newarr=[]
@@ -65,13 +66,14 @@ class Web_scrapper:
                 text = parent.find('span',{'class':'a-size-base-plus a-color-base a-text-normal'}).text
                 price=parent.find('span',{'class':'a-offscreen'})
                 img_src=parent.find('div',{'class':'a-section aok-relative s-image-square-aspect'}).find('img').get('src')
-                new_obj={'img_src':img_src,'discription':text,'price':price}
+                new_obj={'image':img_src,'discription':text,'price':price}
                 newarr.append(new_obj)
                 
             except:
                 pass
 
-        return newarr
+        ret_arr = {'data':newarr,'name':'amazon'}
+        return ret_arr
 
 
 
@@ -121,7 +123,8 @@ class Web_scrapper:
 
             except Exception as e:
                 pass
-        return newarr
+        ret_arr = {'data':newarr,'name':'daraz'}
+        return ret_arr
 
     def walmart(self,name):
         newarr=[]
@@ -163,13 +166,16 @@ class Web_scrapper:
                 discription=parent.find('a',class_='product-item-link').text
                 discription=discription.strip()
                 price=parent.find_all('span',class_='price-final_price')[-1].text
-                newobj={'discription':discription,'img':img,'price':price}
+                new_price = price.replace('रू','Rs')
+                print(new_price)
+                newobj={'discription':discription,'img':img,'price':new_price}
                 newarr.append(newobj)
             # except Exception as e:
             #     pass
 
     
-        return newarr
+        ret_arr = {'data':newarr,'name':'sastodeal'}
+        return ret_arr
 
     def tudoholic(self,name):
         newarr=[]
@@ -213,7 +219,8 @@ class Web_scrapper:
             price=i['max_sales_price']
             newobj={'discription':name,'img':image_path,'price':price}
             newarr.append(newobj)
-        return newarr
+        ret_arr = {'data':newarr,'name':'gyapu'}
+        return ret_arr
 
     def thulo(self,name):
         newarr=[]
@@ -235,9 +242,10 @@ class Web_scrapper:
             newobj={'discription':new_name,'img':image,'price':price}
             newarr.append(newobj)
         
-        return newarr
+        ret_arr = {'data':newarr,'name':'thulo'}
+        return ret_arr
     
  
 
 
-print(Web_scrapper().amazon('cream'))
+print(Web_scrapper().sastodeal('cream'))

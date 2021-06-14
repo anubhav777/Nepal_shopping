@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import include, path
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import Ecom_data, Ecom_Data_List, Searchdata
+from .views import Ecom_data, Ecom_Data_List, Searchdata, Seachdataind, Web_scrapper,ObjectView
 # router = routers.DefaultRouter()
 # router.register(r'postecom', Ecom_data)
 
@@ -23,5 +23,8 @@ urlpatterns = [
     path('ecom/', Ecom_data.as_view()),
     path('ecom/<int:id>', Ecom_Data_List.as_view()),
     path('searchdata/', Searchdata.as_view()),
+    path('searchdata/<int:id>', Seachdataind.as_view()),
+    path('object/',ObjectView.as_view(),)
+    # path('web/',Web_scrapper.as_view(),)
     
 ]
